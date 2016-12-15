@@ -13,10 +13,12 @@ public class ConnectionView extends JFrame{
     private JButton signInButton;
     private JPanel mainJPanel;
     private JPasswordField password;
+    private JButton exitButton;
 
     public ConnectionView() {
         setContentPane(mainJPanel);
     }
+
 
 
 

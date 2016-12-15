@@ -7,10 +7,8 @@ import Controller.MainController;
 public class Main {
 
     public static void main(String [ ] args){
-        MainController mainController = new MainController();
-        /**petit pd ca y est
-         * Salut salut**/
 
-
+        // TODO: 15/12/2016 Think to use your username and password for phpMyAdmin
+        MainController mainController = new MainController("root", "password");
     }
 }
