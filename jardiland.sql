@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 15 Décembre 2016 à 09:52
+-- Généré le :  Jeu 15 Décembre 2016 à 12:52
 -- Version du serveur :  5.7.16
 -- Version de PHP :  7.0.12
 
@@ -110,15 +110,16 @@ CREATE TABLE `product` (
   `name` varchar(256) NOT NULL,
   `species` varchar(256) NOT NULL,
   `price` decimal(10,0) NOT NULL,
-  `idCategory` int(11) NOT NULL
+  `idCategory` int(11) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `species`, `price`, `idCategory`) VALUES
-(1, 'Anthémis', 'Asteraceae', '11', 2);
+INSERT INTO `product` (`id`, `name`, `species`, `price`, `idCategory`, `stock`) VALUES
+(1, 'Anthémis', 'Asteraceae', '11', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -145,6 +146,13 @@ CREATE TABLE `provider` (
   `address` varchar(256) NOT NULL,
   `city` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `provider`
+--
+
+INSERT INTO `provider` (`id`, `name`, `forname`, `address`, `city`) VALUES
+(1, 'Poirier', 'Jean', '6 rue du jardin', 'Chouxland');
 
 -- --------------------------------------------------------
 
@@ -250,7 +258,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `provider`
 --
 ALTER TABLE `provider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `supply`
 --

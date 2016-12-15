@@ -1,7 +1,6 @@
 package Controller;
 
 import View.ConnectionView;
-import com.mysql.jdbc.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Properties;
+
+import com.mysql.*;
+
 
 /**
  * Created by Ronan
@@ -40,7 +42,7 @@ public class ConnectionController implements ActionListener{
             userInfo.put("user", userBBD);
             userInfo.put("password", passwordBDD);
             // TODO: 15/12/2016 Think to change the link to your DataBase
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/TP4?useSSL=false&allowMultiQueries=true", userInfo);
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/jardiland?useSSL=false&allowMultiQueries=true", userInfo);
         } catch (ClassNotFoundException e) {
             System.err.println("Driver not found");
             e.printStackTrace();
