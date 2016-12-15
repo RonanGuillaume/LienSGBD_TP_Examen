@@ -17,6 +17,7 @@ public class ConnectionView extends JFrame{
 
     public ConnectionView() {
         setContentPane(mainJPanel);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
 
