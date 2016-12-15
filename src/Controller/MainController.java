@@ -7,9 +7,8 @@ package Controller;
 public class MainController {
 
     private ConnectionController connectionController;
-    private BookController bookController;
 
-    public MainController() {
-        connectionController = new ConnectionController();
+    public MainController(String userBBD, String passwordBDD) {
+        connectionController = new ConnectionController(userBBD, passwordBDD);
     }
 }

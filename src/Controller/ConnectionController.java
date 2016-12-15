@@ -1,10 +1,14 @@
 package Controller;
 
 import View.ConnectionView;
+import com.mysql.jdbc.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.Properties;
 
 /**
@@ -13,9 +17,13 @@ import java.util.Properties;
  */
 public class ConnectionController implements ActionListener{
 
+    private Connection connection;
+
     private ConnectionView connectionView;
 
-    public ConnectionController() {
+    public ConnectionController(String userBBD, String passwordBDD) {
+        connectionToTheBDD(userBBD, passwordBDD);
+
         connectionView = new ConnectionView();
 
         connectionView.registerListener(this);
@@ -23,22 +31,36 @@ public class ConnectionController implements ActionListener{
         connectionView.setVisible(true);
     }
 
-    private void connection(){
+
+
+    private void connectionToTheBDD(String userBBD, String passwordBDD) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex1) {
-            System.out.println("Driver not found!");
-            System.exit(1);
-        }
-        try {
             Properties userInfo = new Properties();
-            userInfo.put("user", "root");
-            userInfo.put("password", "password");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/TP4?useSSL=false&allowMultiQueries=true", userInfo);
+            userInfo.put("user", userBBD);
+            userInfo.put("password", passwordBDD);
+            // TODO: 15/12/2016 Think to change the link to your DataBase
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/TP4?useSSL=false&allowMultiQueries=true", userInfo);
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Connection to the BDD failed");
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    // TODO: 15/12/2016 Move to a ViewController
+    private void connection(){
 
             //Création d'un objet Statement
-            Statement state = connection.createStatement();
-
+        Statement state = null;
+        try {
+            state = connection.createStatement();
             String email = connectionView.getEmailTextField().getText();
             String password = new String(connectionView.getPassword().getPassword());
 
