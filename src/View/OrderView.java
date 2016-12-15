@@ -12,7 +12,7 @@ public class OrderView extends JFrame{
     private JComboBox comboBox1;
     private JSpinner spinner1;
     private JTable orderTable;
-    private JButton disconnectButton;
+    private JButton signOutButton;
     private JButton validateButton;
     private JButton addButton;
     private JLabel subtotalLabel;

@@ -1,5 +1,7 @@
 package View.ModelView;
 
+import Model.OrderRow;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 

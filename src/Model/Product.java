@@ -10,7 +10,7 @@ public class Product {
     private String name;
     private String species;
     private double unitPrice;
-    private String category;
+    private Category category;
 
     public Product() {
     }
@@ -31,7 +31,7 @@ public class Product {
         return unitPrice;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 }

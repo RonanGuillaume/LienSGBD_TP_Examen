@@ -15,23 +15,15 @@ import java.util.Properties;
  * Created by Ronan
  * 08/12/2016.
  */
-public class ConnectionController implements ActionListener{
+public class ConnectionController{
 
     private Connection connection;
-
-    private ConnectionView connectionView;
 
     public ConnectionController(String userBBD, String passwordBDD) {
         connectionToTheBDD(userBBD, passwordBDD);
 
-        connectionView = new ConnectionView();
 
-        connectionView.registerListener(this);
-
-        connectionView.setVisible(true);
     }
-
-
 
     private void connectionToTheBDD(String userBBD, String passwordBDD) {
         try {
@@ -54,43 +46,25 @@ public class ConnectionController implements ActionListener{
         return connection;
     }
 
-    // TODO: 15/12/2016 Move to a ViewController
-    private void connection(){
+    public boolean isSignUp(String email, String password){
 
-            //Création d'un objet Statement
-        Statement state = null;
+        boolean testResult = false;
+
         try {
-            state = connection.createStatement();
-            String email = connectionView.getEmailTextField().getText();
-            String password = new String(connectionView.getPassword().getPassword());
-
+            Statement state = connection.createStatement();
             String query = "SELECT * FROM user WHERE EmailUser LIKE ? and PasswordUser LIKE ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet result = preparedStatement.executeQuery();
-
-            while(result.next()){
-                System.out.println("Email User :"  + result.getString("EmailUser") +
-                        "\n\t Password :" + result.getString("PasswordUser")
-                );
-            }
-
+            testResult = (result.first());
             preparedStatement.close();
             state.close();
 
-        } catch (SQLException ex2) {
-            System.out.println("Error JDBC: "+ex2);
-            System.exit(1);
+        } catch (SQLException e) {
+            System.err.println("Error JDBC: "+e);
+            e.printStackTrace();
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()){
-            case "Sign in" :
-                connection();
-                break;
-        }
+            return testResult;
     }
 }

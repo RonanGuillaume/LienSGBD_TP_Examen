@@ -1,4 +1,4 @@
-package View.ModelView;
+package Model;
 
 import Model.Product;
 
