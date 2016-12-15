@@ -27,19 +27,17 @@ public class ConnectionView extends JFrame{
     private void makeConnectionView() {
         setVisible(true);
 
-        //Set the frame on the middle screen
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-
         //Minimize the frame's size and freeze the minimum size
         pack();
         setMinimumSize(getSize());
 
+        //Set the frame on the middle screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
         //set Sign In as a default button
         JRootPane rootPane = SwingUtilities.getRootPane(signInButton);
         rootPane.setDefaultButton(signInButton);
-
-
 
 
         //Action when we click on exit

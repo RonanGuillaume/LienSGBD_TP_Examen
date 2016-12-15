@@ -1,8 +1,10 @@
 package View;
 
+import Controller.MainController;
 import View.ModelView.OrderTableModel;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Ronan
@@ -26,7 +28,29 @@ public class OrderView extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(mainPanel);
 
+        makeOrderView();
+    }
+
+    private void makeOrderView() {
+        setVisible(true);
+
+        //Minimize the frame's size and freeze the minimum size
+        pack();
+        setMinimumSize(getSize());
+
+        //Set the frame on the middle screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
+        //set Sign In as a default button
+        JRootPane rootPane = SwingUtilities.getRootPane(validateButton);
+        rootPane.setDefaultButton(validateButton);
+
         orderTableModel = new OrderTableModel();
         orderTable.setModel(orderTableModel);
+    }
+
+    public void registerListener(MainController connectionController){
+        signOutButton.addActionListener(connectionController);
     }
 }

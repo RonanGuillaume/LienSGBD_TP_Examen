@@ -1,6 +1,7 @@
 package Controller;
 
 import View.ConnectionView;
+import View.OrderView;
 import com.mysql.jdbc.Connection;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class MainController implements ActionListener{
     private ConnectionController connectionController;
 
     private ConnectionView connectionView;
+    private OrderView orderView;
 
     public MainController(String userBBD, String passwordBDD) {
         connectionController = new ConnectionController(userBBD, passwordBDD);
@@ -32,7 +34,8 @@ public class MainController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "Disconnect":
+            case "Sign out":
+                signOut();
                 break;
             case "Add":
                 break;
@@ -47,15 +50,25 @@ public class MainController implements ActionListener{
         }
     }
 
+    private void signOut() {
+        orderView.setVisible(false);
+        connectionView.getPassword().setText("");
+        connectionView.getEmailTextField().setText("");
+        connectionView.setVisible(true);
+    }
+
     private void signIn() {
 
             String email = connectionView.getEmailTextField().getText();
             String password = new String(connectionView.getPassword().getPassword());
 
             if(connectionController.isSignUp(email, password)) {
-                System.out.println("Connected");
+                connectionView.setVisible(false);
+                orderView = new OrderView();
+                orderView.registerListener(this);
             }
             else{
+                connectionView.getPassword().setText("");
                 JOptionPane.showMessageDialog(connectionView,
                         "Sorry, incorrect username or password...",
                         "Connection failed",
