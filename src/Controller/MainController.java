@@ -37,8 +37,6 @@ public class MainController implements ActionListener{
             case "Sign out":
                 signOut();
                 break;
-            case "Add":
-                break;
             case "Validate":
                 break;
             case "Sign in" :

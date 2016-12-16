@@ -15,6 +15,14 @@ public class Product {
     public Product() {
     }
 
+    public Product(int reference, String name, String species, double unitPrice, Category category) {
+        this.reference = reference;
+        this.name = name;
+        this.species = species;
+        this.unitPrice = unitPrice;
+        this.category = category;
+    }
+
     public int getReference() {
         return reference;
     }
@@ -33,5 +41,9 @@ public class Product {
 
     public Category getCategory() {
         return category;
+    }
+
+    public String toString(){
+        return ""+Integer.toString(reference)+", "+name+", "+species;
     }
 }
