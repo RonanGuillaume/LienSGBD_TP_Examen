@@ -1,5 +1,9 @@
 package Controller;
 
+import DAO.AbstractDAO;
+import DAO.CustomerDAO;
+import DAO.OrderDAO;
+import DAO.ProductDAO;
 import View.ConnectionView;
 import View.OrderView;
 import com.mysql.jdbc.Connection;
@@ -21,14 +25,20 @@ import static java.lang.System.exit;
 public class MainController implements ActionListener{
 
     private ConnectionController connectionController;
-
     private ConnectionView connectionView;
     private OrderView orderView;
+
+    private CustomerDAO customerDAO;
+    private OrderDAO orderDAO;
+    private ProductDAO productDAO;
 
     public MainController(String userBBD, String passwordBDD) {
         connectionController = new ConnectionController(userBBD, passwordBDD);
         connectionView = new ConnectionView();
         connectionView.registerListener(this);
+        customerDAO = new CustomerDAO(connectionController.getConnection());
+        orderDAO = new OrderDAO(connectionController.getConnection());
+        productDAO = new ProductDAO(connectionController.getConnection());
     }
 
     @Override
