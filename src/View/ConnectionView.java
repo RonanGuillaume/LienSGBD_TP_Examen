@@ -16,6 +16,7 @@ public class ConnectionView extends JFrame{
     private JPanel mainJPanel;
     private JPasswordField password;
     private JButton exitButton;
+    private JButton signUpButton;
 
     public ConnectionView() {
         setContentPane(mainJPanel);
@@ -50,6 +51,7 @@ public class ConnectionView extends JFrame{
 
     public void registerListener(MainController connectionController){
         signInButton.addActionListener(connectionController);
+        signUpButton.addActionListener(connectionController);
     }
 
     public JTextField getEmailTextField() {
