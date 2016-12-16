@@ -19,22 +19,29 @@ import java.sql.Connection;
  */
 public abstract class AbstractDAO {
 
+    private Connection connection;
 
+    public AbstractDAO(Connection connection) {
+        this.connection = connection;
+
+    }
+
+    
     public int getStock(String product){
         int stock = -1;
         try {
             //TODO : I don't see how we can put all DAO fonction in ABSTRACT DAO...
 
             String query =  "SELECT `stock` " +
-                            "FROM product" +
-                            " WHERE name LIKE '?'";
+                    "FROM product" +
+                    " WHERE name LIKE ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, product);
             ResultSet result = preparedStatement.executeQuery();
 
 
             while(result.next()){
-                stock = (int) result.getInt("stock");
+                stock = result.getInt("stock");
             }
 
             preparedStatement.close();
@@ -48,11 +55,9 @@ public abstract class AbstractDAO {
     public int addProvider(String name, String forname, String address, String city){
         int stock = -1;
         try {
-            //TODO : I don't see how we can put all DAO fonction in ABSTRACT DAO...
-
             String query =  "INSERT INTO `provider` " +
                     "(`name`, `forname`, `address`, `city`) " +
-                    "VALUES ('?', '?', '?', '?');";
+                    "VALUES (?,?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, forname);
@@ -74,17 +79,14 @@ public abstract class AbstractDAO {
                 //TODO : I don't see how we can put all DAO fonction in ABSTRACT DAO...
 
                 String query =  "UPDATE `product` " +
-                                "SET stock = stock+?" +
-                                " WHERE name LIKE '?'";
+                        "SET stock = stock+?" +
+                        " WHERE name LIKE ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1, number);
                 preparedStatement.setString(2, product);
 
-                //Result vraiment necessaire ?
-                ResultSet result = preparedStatement.executeQuery();
-
+                preparedStatement.executeUpdate();
                 preparedStatement.close();
-
 
             } catch (SQLException ex2) {
                 System.out.println("Error JDBC: "+ex2);
@@ -93,10 +95,5 @@ public abstract class AbstractDAO {
         }
     }
 
-    private Connection connection;
 
-    public AbstractDAO(Connection connection) {
-        this.connection = connection;
-
-    }
 }
