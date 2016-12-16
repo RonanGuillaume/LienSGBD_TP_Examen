@@ -67,8 +67,8 @@ public class OrderView extends JFrame{
         productComboBox.setModel(productComboBoxModel);
 
         //Just for the test
-//        productComboBoxModel.addElement(new Product(1, "Rose", "Rouge", 20, Category.Flower));
-//        productComboBoxModel.addElement(new Product(2, "Rose", "Blanche", 30, Category.Flower));
+        productComboBoxModel.addElement(new Product(1, "Rose", "Rouge", 20, Category.Flower));
+        productComboBoxModel.addElement(new Product(2, "Rose", "Blanche", 30, Category.Flower));
 
         addButton.addActionListener(e -> {
             if(spinnerNumberModel.getNumber().intValue() < 1 || spinnerNumberModel.getNumber().intValue() > 1000){

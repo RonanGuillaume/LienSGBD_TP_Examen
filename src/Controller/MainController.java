@@ -2,6 +2,7 @@ package Controller;
 
 import View.ConnectionView;
 import View.OrderView;
+import View.SignUpView;
 import com.mysql.jdbc.Connection;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class MainController implements ActionListener{
 
     private ConnectionView connectionView;
     private OrderView orderView;
+    private SignUpView signUpView;
 
     public MainController(String userBBD, String passwordBDD) {
         connectionController = new ConnectionController(userBBD, passwordBDD);
@@ -42,10 +44,35 @@ public class MainController implements ActionListener{
             case "Sign in" :
                 signIn();
                 break;
+            case "Sign up" :
+                signUp();
+                break;
+            case "Cancel" :
+                cancel();
+            case "Create my account" :
+                createAccount();
+                break;
             default:
                 System.err.println("Wrong Command");
                 exit(1);
         }
+    }
+
+    private void createAccount() {
+        
+    }
+
+    private void cancel() {
+        signUpView.setVisible(false);
+        connectionView.getEmailTextField().setText("");
+        connectionView.getPassword().setText("");
+        connectionView.setVisible(true);
+    }
+
+    private void signUp() {
+        connectionView.setVisible(false);
+        signUpView = new SignUpView();
+        signUpView.registerListener(this);
     }
 
     private void signOut() {

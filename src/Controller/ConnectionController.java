@@ -32,7 +32,7 @@ public class ConnectionController{
             userInfo.put("user", userBBD);
             userInfo.put("password", passwordBDD);
             // TODO: 15/12/2016 Think to change the link to your DataBase
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/TP4?useSSL=false&allowMultiQueries=true", userInfo);
+            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/jardiland?useSSL=false&allowMultiQueries=true", userInfo);
         } catch (ClassNotFoundException e) {
             System.err.println("Driver not found");
             e.printStackTrace();
@@ -52,7 +52,7 @@ public class ConnectionController{
 
         try {
             Statement state = connection.createStatement();
-            String query = "SELECT * FROM user WHERE EmailUser LIKE ? and PasswordUser LIKE ?;";
+            String query = "SELECT * FROM customer WHERE email LIKE ? and password LIKE ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
