@@ -1,8 +1,10 @@
 package View;
 
 import Controller.ConnectionController;
+import Controller.MainController;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Ronan
@@ -17,12 +19,36 @@ public class ConnectionView extends JFrame{
 
     public ConnectionView() {
         setContentPane(mainJPanel);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        makeConnectionView();
+    }
+
+    private void makeConnectionView() {
+        setVisible(true);
+
+        //Minimize the frame's size and freeze the minimum size
+        pack();
+        setMinimumSize(getSize());
+
+        //Set the frame on the middle screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
+        //set Sign In as a default button
+        JRootPane rootPane = SwingUtilities.getRootPane(signInButton);
+        rootPane.setDefaultButton(signInButton);
+
+
+        //Action when we click on exit
+        exitButton.addActionListener(e -> {
+            dispose();
+            System.exit(0);
+        });
     }
 
 
-
-
-    public void registerListener(ConnectionController connectionController){
+    public void registerListener(MainController connectionController){
         signInButton.addActionListener(connectionController);
     }
 

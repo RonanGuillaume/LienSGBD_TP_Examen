@@ -1,5 +1,6 @@
 package DAO;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,12 +8,17 @@ import java.sql.SQLException;
 import Controller.ConnectionController;
 
 import static sun.plugin2.message.JavaScriptSlotOpMessage.SET;
+import Controller.ConnectionController;
+
+import java.sql.Connection;
+
 
 /**
  * Created by Ronan
  * on 15/12/2016.
  */
 public abstract class AbstractDAO {
+
 
     public int getStock(String product){
         int stock = -1;
@@ -85,5 +91,12 @@ public abstract class AbstractDAO {
                 System.exit(1);
             }
         }
+    }
+
+    private Connection connection;
+
+    public AbstractDAO(Connection connection) {
+        this.connection = connection;
+
     }
 }
